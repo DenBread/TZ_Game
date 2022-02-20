@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Lose : MonoBehaviour
 {
-
+    
     [SerializeField] private GameObject _panelLose;
 
     /// <summary>
@@ -14,11 +14,6 @@ public class Lose : MonoBehaviour
     public void ShowPanelLose()
     {
         _panelLose.SetActive(true);
-    }
-
-    public void AgainPlay()
-    {
-        
     }
 
     /// <summary>

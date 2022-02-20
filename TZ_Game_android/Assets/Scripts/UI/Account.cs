@@ -12,7 +12,9 @@ public class Account : MonoBehaviour
     [Header("Текст Txt_Account в PanelGameplay")]
     [SerializeField] private Text textAccount;
     [Header("Текст Txt_Record в PanelStart")]
-    [SerializeField] private Text txtBestScore;
+    [SerializeField] private Text txtBestScoreMenu;
+    [Header("Текст Txt_Record в PanelLose")]
+    [SerializeField] private Text txtBestScoreLose;
     public int Score { get; private set; } = 0;
     public int BestScore { get; private set; }
 
@@ -24,7 +26,8 @@ public class Account : MonoBehaviour
     private void Awake()
     {
         BestScore = PlayerPrefs.GetInt(_bestScoreKey, 0);
-        txtBestScore.text = "Record: " + BestScore;
+        txtBestScoreMenu.text = "Record: " + BestScore;
+        txtBestScoreLose.text = "Record: " + BestScore;
         textAccount.text = "Счет: " + Score.ToString();
     }
 

@@ -49,9 +49,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textAccount: {fileID: 0}
-  txtBestScore: {fileID: 0}
+  txtBestScoreMenu: {fileID: 0}
+  txtBestScoreLose: {fileID: 0}
   _minScore: 2
-  _maxScore: 10
+  _maxScore: 20
 --- !u!114 &8510844408191977964
 MonoBehaviour:
   m_ObjectHideFlags: 0
