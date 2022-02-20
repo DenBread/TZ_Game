@@ -13,9 +13,11 @@ public class EnemySpawn : MonoBehaviour
     [SerializeField] private int _maxCountEnemy;
     [SerializeField] private GameObject _enemyPrefabs;
     [SerializeField] private Transform[] _spawnPoints;
+    public List<GameObject> Enemies { get; private set; } // лист сохраняет врагов, когда они спавняться
 
     private void Start()
     {
+        Enemies = new List<GameObject>();
         StartCoroutine(SpawnRepetition());
     }
 
@@ -26,6 +28,7 @@ public class EnemySpawn : MonoBehaviour
             _countEnemy++;
             int randomPoint = Random.Range(0, _spawnPoints.GetLength(0));
             GameObject enemy = Instantiate(_enemyPrefabs, _spawnPoints[randomPoint].position, Quaternion.identity);
+            Enemies.Add(enemy);
         }
     }
 

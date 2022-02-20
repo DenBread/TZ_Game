@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 
 public class EnemyMove : MonoBehaviour
 {
-    private NavMeshAgent _navMeshAgent;
+    public NavMeshAgent NavMeshAgent { get; private set; }
     private GameObject _point;
     [Header("Точки для спавна")]
     [SerializeField] private Transform _pointPosition;
@@ -22,15 +22,15 @@ public class EnemyMove : MonoBehaviour
 
     private void Start()
     {
-        _navMeshAgent = GetComponent<NavMeshAgent>();
-        _navMeshAgent.speed = _speed;
+        NavMeshAgent = GetComponent<NavMeshAgent>();
+        NavMeshAgent.speed = _speed;
         _point = Instantiate(_pointPosition.gameObject);
         StartCoroutine(NewPoint());
     }
 
     private void Update()
     {
-        _navMeshAgent.SetDestination(_point.transform.position);
+        NavMeshAgent.SetDestination(_point.transform.position);
     }
 
     private IEnumerator NewPoint()
