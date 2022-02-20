@@ -7,7 +7,10 @@ using UnityEngine.AI;
 public class PlayerLocator : MonoBehaviour
 {
     [SerializeField] private EnemySpawn _enemySpawn;
-    private NavMeshAgent _navMeshAgent;
+    [SerializeField] private CrystalSpawn _crystalSpawn;
+    [SerializeField] private Transform _arrowEnemy;
+    [SerializeField] private Transform _arraowCrystal;
+    [SerializeField] private float _speedArraw;
 
     private void Awake()
     {
@@ -15,64 +18,89 @@ public class PlayerLocator : MonoBehaviour
         {
             _enemySpawn = FindObjectOfType<EnemySpawn>();
         }
-
-        _navMeshAgent = GetComponent<NavMeshAgent>();
+        
     }
 
     private void Start()
     {
-        
+        StartCoroutine(FindCloseEnemy());
+        StartCoroutine(FindCloseCrystal());
     }
 
-    private void Update()
+    private void ArrowOnEnemy(GameObject gmEnemy)
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        Vector3 diretion = gmEnemy.transform.position - transform.position;
+        float angel = Mathf.Atan2(diretion.x, diretion.z) * Mathf.Rad2Deg;
+        Quaternion rotation = Quaternion.AngleAxis(angel, Vector3.forward);
+        _arrowEnemy.rotation = Quaternion.Slerp(_arrowEnemy.rotation, rotation, _speedArraw * Time.deltaTime);
+    }
+    
+    private void ArrowOnCrystal(GameObject gmCrystal)
+    {
+        if (gmCrystal != null)
         {
-            StartCoroutine(GetClosestTarget());
+            Vector3 diretion = gmCrystal.transform.position - transform.position;
+            float angel = Mathf.Atan2(diretion.x, diretion.z) * Mathf.Rad2Deg;
+            Quaternion rotation = Quaternion.AngleAxis(angel, Vector3.forward);
+            _arraowCrystal.rotation = Quaternion.Slerp(_arraowCrystal.rotation, rotation, _speedArraw * Time.deltaTime);
+        }
+        else
+        {
+            //Debug.LogError("Кристалл не создался!");
         }
     }
 
-    private IEnumerator GetClosestTarget() {
+    private IEnumerator FindCloseEnemy()
+    {
         while (true)
         {
-            float tmpDist = float.MaxValue;
-            GameObject currentTarget = null;
-            for (int i = 0; i < _enemySpawn.Enemies.Count; i++) {
-                if (_navMeshAgent.SetDestination(_enemySpawn.Enemies[i].transform.position)) {
-                    //ждем пока вычислится путь до цели
-                    while (_navMeshAgent.pathPending) {
-                        yield return null;
-                    }
-                    Debug.Log(_navMeshAgent.pathStatus.ToString());
-                    // проверяем, можно ли дойти до цели
-                    if (_navMeshAgent.pathStatus != NavMeshPathStatus.PathInvalid) {
-                        float pathDistance = 0;
-                        //вычисляем длину пути
-                        pathDistance += Vector3.Distance(transform.position, _navMeshAgent.path.corners[0]);
-                        for (int j = 1; j < _navMeshAgent.path.corners.Length; j++) {
-                            pathDistance += Vector3.Distance(_navMeshAgent.path.corners[j - 1], _navMeshAgent.path.corners[j]);
-                        }
+            float distanceToClosesEnemy = Mathf.Infinity;
+            GameObject closeEnemy = null;
 
-                        if (tmpDist > pathDistance) { 
-                            tmpDist = pathDistance;
-                            currentTarget = _enemySpawn.Enemies[i];
-                            _navMeshAgent.ResetPath();
-                        }
-                    } else {
-                        Debug.Log("невозможно дойти до "+ _enemySpawn.Enemies[i].name);
-                    }
-
+            foreach (var currentEnemy in _enemySpawn.Enemies)
+            {
+                float distanceToEnemy = (currentEnemy.transform.position - transform.position).sqrMagnitude;
+                if (distanceToEnemy < distanceToClosesEnemy)
+                {
+                    distanceToClosesEnemy = distanceToEnemy;
+                    closeEnemy = currentEnemy;
                 }
-
             }
-            if (currentTarget != null) {
-                //_navMeshAgent.SetDestination(currentTarget.transform.position);
-                var heading = currentTarget.transform.position - transform.position;
-                var distance = heading.magnitude;
+            ArrowOnEnemy(closeEnemy);
+            Debug.DrawLine(transform.position, closeEnemy.transform.position, Color.yellow, 10f);
 
-                Debug.Log(distance);
-                //... дальше ваша логика движения к цели
+            yield return null;
+        }
+    }
+
+    private IEnumerator FindCloseCrystal()
+    {
+        while (true)
+        {
+            float distanceToClosesCrystal = Mathf.Infinity;
+            GameObject closeCrystal = null;
+
+            if (_crystalSpawn.CountCrystal != 0)
+            {
+                _arraowCrystal.gameObject.SetActive(true);
+                foreach (var currentCrystal in _crystalSpawn.AllCrystal)
+                {
+                    float distanceToCrystal = (currentCrystal.transform.position - transform.position).sqrMagnitude;
+                    if (distanceToCrystal < distanceToClosesCrystal)
+                    {
+                        distanceToClosesCrystal = distanceToCrystal;
+                        closeCrystal = currentCrystal;
+                    }
+                }
             }
+            else
+            {
+                _arraowCrystal.gameObject.SetActive(false);
+            }
+            
+            ArrowOnCrystal(closeCrystal);
+
+            yield return null;
         }
     }
 }

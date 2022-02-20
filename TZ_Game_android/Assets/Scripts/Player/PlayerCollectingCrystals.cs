@@ -19,10 +19,11 @@ public class PlayerCollectingCrystals : MonoBehaviour
     {
         if (other.gameObject.GetComponent<CrystalRotation>())
         {
-            Destroy(other.gameObject);
+            GameObject gm = other.gameObject;
             _account.AddScore();
-            _crystalSpawn.CountCrystal--;
+            _crystalSpawn.DestroyCrystal(gm);
             _playerHealth.AddHealth();
+            Destroy(other.gameObject);
         }
     }
 }

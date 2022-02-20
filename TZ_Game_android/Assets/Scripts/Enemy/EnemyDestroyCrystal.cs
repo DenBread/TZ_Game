@@ -16,7 +16,8 @@ public class EnemyDestroyCrystal : MonoBehaviour
     {
         if (other.gameObject.GetComponent<CrystalRotation>())
         {
-            _crystalSpawn.CountCrystal--;
+            GameObject gm = other.gameObject;
+            _crystalSpawn.DestroyCrystal(gm);
             Destroy(other.gameObject);
         }
     }

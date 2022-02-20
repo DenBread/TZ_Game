@@ -19,10 +19,13 @@ public class CrystalSpawn : MonoBehaviour
     [SerializeField] private int _maxCrystal;
     [Header("Время через которое появляеться кристалл")]
     [SerializeField] private float _timeSpawn;
-    
+
+    public List<GameObject> AllCrystal { get; private set; }
+    [SerializeField] private NumberOfObject _numberOfObject;
  
     private void Start()
     {
+        AllCrystal = new List<GameObject>();
         StartCoroutine(SpawnRepetition());
     }
 
@@ -43,14 +46,23 @@ public class CrystalSpawn : MonoBehaviour
     /// </summary>
     public void Spawn()
     {
-        if (CountCrystal > _maxCrystal)
+        if (CountCrystal < _maxCrystal)
         {
-            CountCrystal = _maxCrystal;
+            //CountCrystal = _maxCrystal;
+            CountCrystal++;
+            Vector3 vec = new Vector3(Random.Range(-_x, _x), transform.position.y, Random.Range(-_z, _z));
+            GameObject gm = Instantiate(_crystalPrefab, vec, Quaternion.Euler(90, 0, 0));
+            AllCrystal.Add(gm);
+            
+            _numberOfObject.UpdateTxt(CountCrystal, _maxCrystal, NumberOfObject.ListTexts.Crystal);
         }
-        
-        CountCrystal++;
-        Vector3 vec = new Vector3(Random.Range(-_x, _x), transform.position.y, Random.Range(-_z, _z));
-        GameObject gm = Instantiate(_crystalPrefab, vec, Quaternion.Euler(90, 0, 0));
+    }
+
+    public void DestroyCrystal(GameObject gm)
+    {
+        AllCrystal.Remove(gm);
+        CountCrystal--;
+        _numberOfObject.UpdateTxt(CountCrystal, _maxCrystal, NumberOfObject.ListTexts.Crystal);
     }
     
 }
