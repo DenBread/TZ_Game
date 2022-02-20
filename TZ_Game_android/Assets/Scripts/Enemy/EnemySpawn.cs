@@ -19,14 +19,6 @@ public class EnemySpawn : MonoBehaviour
         StartCoroutine(SpawnRepetition());
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Spawn();
-        }
-    }
-
     public void Spawn()
     {
         if (_countEnemy < _maxCountEnemy)

@@ -9,6 +9,7 @@ public class Block : MonoBehaviour
     {
         if (other.gameObject.GetComponent<CrystalRotation>())
         {
+            other.gameObject.SetActive(false);
             Destroy(other.gameObject);
             _crystalSpawn.Spawn();
         }

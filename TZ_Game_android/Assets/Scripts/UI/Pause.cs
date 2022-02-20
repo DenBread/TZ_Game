@@ -12,7 +12,7 @@ public class Pause : MonoBehaviour
     {
         if (_isPause)
         {
-            Time.timeScale = 0.001f;
+            Time.timeScale = 0f;
         }
     }
 
@@ -21,7 +21,7 @@ public class Pause : MonoBehaviour
     /// </summary>
     public void PauseOn()
     {
-        Time.timeScale = 0.001f;
+        Time.timeScale = 0f;
     }
 
     /// <summary>

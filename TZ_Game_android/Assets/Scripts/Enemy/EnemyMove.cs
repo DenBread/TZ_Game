@@ -10,7 +10,9 @@ public class EnemyMove : MonoBehaviour
 {
     private NavMeshAgent _navMeshAgent;
     private GameObject _point;
+    [Header("Точки для спавна")]
     [SerializeField] private Transform _pointPosition;
+    [Header("Скорость перемещения")]
     [SerializeField] private float _speed;
     
     [Header("Предел перемещения по оси X")]

@@ -7,25 +7,23 @@ using Random = UnityEngine.Random;
 
 public class CrystalSpawn : MonoBehaviour
 {
+    [Header("Площадь для спавна кристалов")]
     [SerializeField] private float _x;
     [SerializeField] private float _z;
+    [Space]
     [SerializeField] private GameObject _crystalPrefab;
     public int CountCrystal { get; set; }
     private bool _isSpawn = true;
     
     [Header("Максимальное кол-во кристалов на сцене")]
     [SerializeField] private int _maxCrystal;
-    [Header("Время через которое появляеться кристалл в секундах")]
+    [Header("Время через которое появляеться кристалл")]
     [SerializeField] private float _timeSpawn;
     
  
     private void Start()
     {
         StartCoroutine(SpawnRepetition());
-        for (int i = 1; i < _maxCrystal; i++)
-        {
-            Spawn();
-        }
     }
 
     private IEnumerator SpawnRepetition()
@@ -40,6 +38,9 @@ public class CrystalSpawn : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Спавн кристалов
+    /// </summary>
     public void Spawn()
     {
         if (CountCrystal > _maxCrystal)

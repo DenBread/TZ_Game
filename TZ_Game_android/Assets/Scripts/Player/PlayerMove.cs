@@ -9,7 +9,7 @@ public class PlayerMove : MonoBehaviour
     private Camera _mainCamera;
     private NavMeshAgent _agent;
     private PlayerAnimation _playerAnimation;
-    private bool _isRun;
+    [Header("Скорость перемещения")]
     [SerializeField] private float _speed;
 
     private void Start()

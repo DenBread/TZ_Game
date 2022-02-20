@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class CrystalRotation : MonoBehaviour
 {
+    [Header("Градус поворота")]
     [SerializeField] private float _speed;
 
     private void Update()

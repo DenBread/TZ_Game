@@ -9,7 +9,9 @@ public class Account : MonoBehaviour
 {
     private const string _bestScoreKey = "BestScore";
     
+    [Header("Текст Txt_Account в PanelGameplay")]
     [SerializeField] private Text textAccount;
+    [Header("Текст Txt_Record в PanelStart")]
     [SerializeField] private Text txtBestScore;
     public int Score { get; private set; } = 0;
     public int BestScore { get; private set; }
@@ -27,17 +29,17 @@ public class Account : MonoBehaviour
     }
 
     /// <summary>
-    /// Добавляет рандомные очки за кристал
+    /// Добавляет рандомные очки за кристалл
     /// </summary>
     public void AddScore()
     {
         Score += Random.Range(_minScore,_maxScore);
-        textAccount.text = "Счет: " + Score.ToString();
+        textAccount.text = "Score: " + Score.ToString();
         SaveScore();
     }
 
     /// <summary>
-    /// Сохраняем лучший счет
+    /// Сохраняем лучшего счета
     /// </summary>
     private void SaveScore()
     {

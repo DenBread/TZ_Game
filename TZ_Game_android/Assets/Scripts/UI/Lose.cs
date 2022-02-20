@@ -8,6 +8,9 @@ public class Lose : MonoBehaviour
 
     [SerializeField] private GameObject _panelLose;
 
+    /// <summary>
+    /// Показывает панель проигрыша
+    /// </summary>
     public void ShowPanelLose()
     {
         _panelLose.SetActive(true);
@@ -18,6 +21,9 @@ public class Lose : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Показывает главное меню
+    /// </summary>
     public void ShowMenu()
     {
         SceneManager.LoadScene(0);

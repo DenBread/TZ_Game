@@ -5,7 +5,9 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private Image_Health _imageHealth;
+    [Header("Максимальное кол-во здоровья")]
     [SerializeField] private int _maxHealth;
+    [Header("Время неуязвимости, при получения урона")]
     [SerializeField] private float _timeImmortality;
     private bool _isImmortality;
     public int Health { get; private set; } = 3;
