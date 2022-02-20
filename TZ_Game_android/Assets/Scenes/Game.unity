@@ -1113,6 +1113,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1467843572725225273, guid: 05115dc5b8dcb854b8bfc37e3ac1c556, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -184
+      objectReference: {fileID: 0}
     - target: {fileID: 1467843572917791856, guid: 05115dc5b8dcb854b8bfc37e3ac1c556, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -1175,11 +1179,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1730911764160714730, guid: f64cd1ceb87e70646b9457083adea091, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.000000015896624
+      value: 0.000000015896626
       objectReference: {fileID: 0}
     - target: {fileID: 1730911764160714730, guid: f64cd1ceb87e70646b9457083adea091, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.000000006584597
+      value: 0.0000000065845973
       objectReference: {fileID: 0}
     - target: {fileID: 1730911764160714730, guid: f64cd1ceb87e70646b9457083adea091, type: 3}
       propertyPath: m_LocalRotation.y
@@ -1410,7 +1414,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7630516845616222417, guid: 90ea3e46efed78c439e410c900656e32, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 90ea3e46efed78c439e410c900656e32, type: 3}
