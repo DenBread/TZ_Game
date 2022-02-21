@@ -39,6 +39,16 @@ public class Account : MonoBehaviour
         Score += Random.Range(_minScore,_maxScore);
         textAccount.text = "Score: " + Score.ToString();
         SaveScore();
+        txtBestScoreLose.text = "Record: " + ShowRecord();
+    }
+
+    private string ShowRecord()
+    {
+        if (Score > BestScore)
+        {
+            return Score.ToString();
+        }
+        return PlayerPrefs.GetInt(_bestScoreKey).ToString();
     }
 
     /// <summary>

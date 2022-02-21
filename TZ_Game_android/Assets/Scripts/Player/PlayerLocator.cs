@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class PlayerLocator : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class PlayerLocator : MonoBehaviour
     [SerializeField] private Transform _arraowCrystal;
     [SerializeField] private float _speedArraw;
 
+    [SerializeField] private Text _txtDistanceEnemy;
+    
     private void Awake()
     {
         if (_enemySpawn == null)
@@ -67,6 +70,7 @@ public class PlayerLocator : MonoBehaviour
                 }
             }
             ArrowOnEnemy(closeEnemy);
+            _txtDistanceEnemy.text = Vector3.Distance(transform.position, closeEnemy.transform.position).ToString();
             Debug.DrawLine(transform.position, closeEnemy.transform.position, Color.yellow, 10f);
 
             yield return null;
